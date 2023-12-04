@@ -9,12 +9,10 @@ pub fn largest_good_integer(num: String) -> String {
     for i in 0..digits.len() {
         if i + 2 < digits.len() {
             match get_good_int(&digits, i) {
-                Some(good_int) => {
-                    match best_int.cmp(&good_int) {
-                        std::cmp::Ordering::Less => best_int = good_int,
-                        std::cmp::Ordering::Equal => (),
-                        std::cmp::Ordering::Greater => (),
-                    }
+                Some(good_int) => match best_int.cmp(&good_int) {
+                    std::cmp::Ordering::Less => best_int = good_int,
+                    std::cmp::Ordering::Equal => (),
+                    std::cmp::Ordering::Greater => (),
                 },
                 None => (),
             }
@@ -27,7 +25,7 @@ pub fn largest_good_integer(num: String) -> String {
 
 fn get_good_int(num: &Vec<char>, start: usize) -> Option<String> {
     if num[start] == num[start + 1] && num[start] == num[start + 2] {
-        Some(num[start..=start+2].into_iter().collect())
+        Some(num[start..=start + 2].into_iter().collect())
     } else {
         None
     }
